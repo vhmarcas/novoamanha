@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Novo Amanhã: Helper e Versículos para a projeção da igreja</title>
+<meta name="description" content="Dois programas para Windows que cuidam da tela do projetor, do Google Meet e dos versículos do culto.">
+<meta name="theme-color" content="#0f5fa8">
+<meta property="og:title" content="Novo Amanhã: projeção da igreja sem complicação">
+<meta property="og:description" content="Helper para a tela compartilhada e Versículos para projetar a Bíblia. Windows 10 e 11.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='24' fill='%23f3b73a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6fbff;
+  --ink: #12253d;
+  --muted: #475d76;
+  --sky: #0f5fa8;
+  --gold: #f3b73a;
+  --amber: #e8892b;
+  --rule: #cfe0f1;
+  --soft: #e8f2fc;
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+  --text: "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1a2d;
+    --ink: #eaf3ff;
+    --muted: #a9bdd4;
+    --sky: #86c0f5;
+    --rule: #24405f;
+    --soft: #11263f;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-text-size-adjust: 100%;
+}
+a { color: var(--sky); text-underline-offset: 3px; }
+a:focus-visible, summary:focus-visible, .btn:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.wrap { width: min(100% - 2.5rem, 68rem); margin-inline: auto; }
+
+/* herói: a própria arte da igreja */
+.hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 68vh;
+  object-fit: cover;
+  object-position: center 40%;
+}
+.hero-text { padding-block: 2.5rem 3rem; border-bottom: 6px solid var(--gold); }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; line-height: 1.15; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(1.9rem, 4.6vw, 3.1rem); max-width: 22ch; }
+.lead { font-size: 1.2rem; color: var(--muted); max-width: 58ch; margin: 1.1rem 0 0; }
+.actions { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; align-items: center; margin-top: 1.8rem; }
+.btn {
+  display: inline-block;
+  background: var(--gold);
+  color: #12253d;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.95rem 1.6rem;
+  border-radius: 999px;
+}
+.btn:hover { background: #ffc94d; }
+.meta { color: var(--muted); font-size: 0.95rem; margin: 0.9rem 0 0; }
+
+section { padding-block: 3.5rem; }
+section + section { border-top: 1px solid var(--rule); }
+h2 { font-size: clamp(1.5rem, 3.2vw, 2.1rem); margin-bottom: 1.4rem; }
+h3 { font-size: 1.35rem; margin-bottom: 0.5rem; }
+p { margin: 0 0 1rem; max-width: 62ch; }
+ul { margin: 0; padding-left: 1.2rem; max-width: 62ch; }
+li { margin-bottom: 0.55rem; }
+li::marker { color: var(--amber); }
+kbd {
+  font-family: var(--text);
+  font-size: 0.85em;
+  background: var(--soft);
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  padding: 0.05em 0.45em;
+  white-space: nowrap;
+}
+
+/* os dois programas, lado a lado, separados por uma linha */
+.pair { display: grid; gap: 3rem; }
+.pair > div + div { border-top: 1px solid var(--rule); padding-top: 3rem; }
+@media (min-width: 52rem) {
+  .pair { grid-template-columns: 1fr 1fr; gap: 0; }
+  .pair > div { padding-right: 3rem; }
+  .pair > div + div { border-top: 0; border-left: 1px solid var(--rule); padding: 0 0 0 3rem; }
+}
+.tag { color: var(--muted); margin-bottom: 1.2rem; }
+
+/* instalação: sequência de verdade */
+ol.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; max-width: 46rem; }
+ol.steps li { counter-increment: s; position: relative; padding-left: 3.4rem; margin-bottom: 1.6rem; }
+ol.steps li::before {
+  content: counter(s);
+  position: absolute; left: 0; top: -0.1rem;
+  width: 2.3rem; height: 2.3rem; border-radius: 50%;
+  background: var(--gold); color: #12253d;
+  font-family: var(--display); font-weight: 700; font-size: 1.15rem;
+  display: grid; place-items: center;
+}
+ol.steps strong { display: block; }
+.note { background: var(--soft); border-left: 4px solid var(--gold); padding: 1rem 1.2rem; max-width: 46rem; }
+.note p:last-child { margin-bottom: 0; }
+
+details { border-bottom: 1px solid var(--rule); max-width: 46rem; }
+summary { cursor: pointer; padding: 1rem 0; font-weight: 600; }
+details p { padding-bottom: 0.4rem; }
+
+footer { border-top: 6px solid var(--gold); padding-block: 2rem; color: var(--muted); font-size: 0.95rem; }
+footer p { margin: 0; max-width: none; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img src="banner.jpg" width="1400" height="788" alt="Sol dourado num céu azul com o nome Novo Amanhã em letras douradas">
+  <div class="wrap hero-text">
+    <h1>Dois programas para a projeção do culto</h1>
+    <p class="lead">O <strong>Helper</strong> cuida da tela do projetor e do Google Meet. O <strong>Versículos</strong> projeta a Bíblia. Funcionam no Windows 10 e 11, sem instalar nada e sem internet.</p>
+    <div class="actions">
+      <a class="btn" href="NovoAmanha_v17.zip" download>Baixar a versão 17 (4 MB)</a>
+      <a href="#instalar">Ver como instalar</a>
+    </div>
+    <p class="meta">Arquivo .zip com os dois programas, os manuais e três Bíblias de domínio público.</p>
+  </div>
+</header>
+
+<main>
+  <section id="programas">
+    <div class="wrap">
+      <h2>O que cada programa faz</h2>
+      <div class="pair">
+        <div>
+          <h3>Novo Amanhã Helper</h3>
+          <p class="tag">Para o notebook que divide a tela com o projetor.</p>
+          <ul>
+            <li>Deixa na tela compartilhada só o navegador e os programas liberados, como o Holyrics.</li>
+            <li>Tela preta, navegador em tela cheia e só o YouTube, cada um com um atalho: <kbd>Ctrl+Alt+P</kbd>, <kbd>Ctrl+Alt+F</kbd> e <kbd>Ctrl+Alt+Y</kbd>.</li>
+            <li>Coloca a imagem da igreja no lugar do papel de parede, sem a barra de tarefas aparecer.</li>
+            <li>Mantém o relógio sempre por cima de tudo.</li>
+            <li>Silencia o navegador que não está sendo compartilhado e avisa quando o Google Meet está em uso.</li>
+            <li>O botão “Liberar tudo” devolve janelas, barra de tarefas e som.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Novo Amanhã Versículos</h3>
+          <p class="tag">Para mostrar o texto bíblico no projetor.</p>
+          <ul>
+            <li>Digite <kbd>jo316</kbd> e aperte Enter: aparece João 3:16.</li>
+            <li>Troque de versão com <kbd>F3</kbd> e <kbd>F4</kbd> sem perder o versículo da tela.</li>
+            <li>Se a referência não existe, avisa quantos versículos o capítulo tem, em vez de projetar outro.</li>
+            <li><kbd>F6</kbd> deixa a tela preta e <kbd>Esc</kbd> limpa o texto.</li>
+            <li>Letra, cores e papel de parede ajustáveis; os atalhos podem ser mudados.</li>
+            <li>Pode importar a versão que quiser porém já vem completo.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="instalar">
+    <div class="wrap">
+      <h2>Como instalar</h2>
+      <ol class="steps">
+        <li><strong>Baixe e extraia o .zip</strong>Clique com o botão direito no arquivo e escolha “Extrair tudo”. Não execute de dentro do zip.</li>
+        <li><strong>Dê dois cliques em <kbd>build.bat</kbd></strong>Faça isso dentro de cada pasta (NovoAmanhaHelper e NovoAmanhaVersiculos). Ele usa o compilador que já vem no Windows e cria o programa na mesma pasta. Não precisa de Visual Studio nem de internet.</li>
+        <li><strong>Abra o programa</strong>O Helper vai pedir permissão de administrador, porque precisa mexer nas janelas de outros programas. Deixe a tela do projetor em modo Estender (<kbd>Win+P</kbd>).</li>
+      </ol>
+      <div class="note">
+        <p>Se o Windows avisar “aplicativo não reconhecido”, é porque o programa foi criado no seu computador e não tem assinatura digital. Clique em “Mais informações” e depois em “Executar assim mesmo”.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="biblias">
+    <div class="wrap">
+      <h2>Bíblias e direitos autorais</h2>
+      <p>O pacote traz só versões de domínio público: Almeida 1911, Tradução Brasileira e Bíblia Livre.</p>
+      <p>NVT, NTLH, NVI, NAA e outras pertencem às editoras e não acompanham o programa. Para usá-las, importe arquivos que a sua igreja tenha licença para usar. Não as redistribua junto com o programa.</p>
+    </div>
+  </section>
+
+  <section id="privacidade">
+    <div class="wrap">
+      <h2>Privacidade</h2>
+      <p>Os programas não enviam nada pela internet. As configurações e o registro de erros ficam no próprio notebook, na pasta AppData do seu usuário.</p>
+    </div>
+  </section>
+
+  <section id="duvidas">
+    <div class="wrap">
+      <h2>Dúvidas frequentes</h2>
+      <details>
+        <summary>Deu erro quando cliquei em build.bat</summary>
+        <p>Abra o arquivo <kbd>log_compilacao.txt</kbd> que aparece na mesma pasta e leia a mensagem. Confira também se você extraiu o zip por completo.</p>
+      </details>
+      <details>
+        <summary>Fechei o Helper e a barra de tarefas sumiu</summary>
+        <p>Isso não deve acontecer: ao fechar, ele devolve a barra e o som dos navegadores, mesmo se for encerrado à força. Se acontecer, abra o Helper de novo e use “Liberar tudo”.</p>
+      </details>
+      <details>
+        <summary>Funciona com uma tela só?</summary>
+        <p>O Versículos funciona: a projeção vira uma janelinha de teste. O Helper só atua em telas extras e nunca mexe na tela do notebook.</p>
+      </details>
+      <details>
+        <summary>Posso abrir o Helper ao ligar o notebook?</summary>
+        <p>Sim. Ele pode perguntar se você está na igreja quando o Windows inicia. Para não pedir permissão a cada vez, copie a pasta para “C:\Arquivos de Programas” e abra o Helper de lá uma vez.</p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Novo Amanhã, versão 17. Feito para a projeção da igreja.</p>
+  </div>
+</footer>
+
+</body>
+</html>
